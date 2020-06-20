@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 45%;
+  width: 80%;
   height: 500px;
 
   background: #FFFFFF;
@@ -67,24 +67,4 @@ export const ActionContainer = styled.div`
   margin-top: 30px;
 `;
 
-
-export const Button = styled.button`
-
-  width: 133px;
-  height: 37px;
-  border: none;
-  background: #660EE1;
-  border-radius: 4px;
-
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 2.0rem;
-  line-height: 23px;
-  text-align: center;
-  color: #FCFBFB;
-  a {
-    color: #FCFBFB;
-    text-decoration: none;
-  }
-`;
 

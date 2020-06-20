@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 `;
 
 export const SearchBar = styled.div`
@@ -48,7 +49,7 @@ export const Card = styled.div`
   position: relative;
   display: flex;
   width: 80%;
-  height: 647px;
+  height: 90%;
 
   background: #FFFFFF;
   box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.25);

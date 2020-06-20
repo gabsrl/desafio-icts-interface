@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { MdClose, MdSubject, MdAttachMoney, MdDescription, MdLayers, MdRemoveRedEye, MdConfirmationNumber} from 'react-icons/md';
 
 import api from '../../services/api';
+import Button from '../../components/button';
 import Container from '../../components/container';
 
-import { CardContainer, CardHeader,Title, Form, InputContainer, ActionContainer ,Button } from './style';
+import { CardContainer, CardHeader,Title, Form, InputContainer, ActionContainer  } from './style';
 
 const AddProduct = (props) => {
 

@@ -6,11 +6,10 @@ import { MdEdit, MdDelete, MdAddCircle} from 'react-icons/md';
 
 import api from '../../services/api';
 
-
+import Button from '../../components/button';
 import {
   Container,
   ModalContainer,
-  ButtonModal,
   TextModal,
   Card,
   Table,
@@ -56,8 +55,8 @@ const Main = (props) => {
         <ModalContainer>
           <TextModal>Tem certeza que deseja apagar o produto?</TextModal>
           <div style={{display: 'flex'}}>
-            <ButtonModal style={{marginRight: '20px'}} onClick={handleOnDelete}>Sim</ButtonModal>
-            <ButtonModal onClick={() => setModalOpen(false)} >Nao</ButtonModal>
+            <Button style={{marginRight: '20px'}} onClick={handleOnDelete}>Sim</Button>
+            <Button onClick={() => setModalOpen(false)} >Nao</Button>
           </div>
 
         </ModalContainer>
@@ -65,7 +64,7 @@ const Main = (props) => {
       <Card style={{marginTop: '50px'}}>
         <Link to={`/product/add`}>
           <MdAddCircle
-            style={{fontSize: '50px', position: 'absolute', right: '-5px', top: '-5px', color: '#883EF0'}}
+            style={{fontSize: '5.0rem', position: 'absolute', right: '-5px', top: '-5px', color: '#400297'}}
           />
         </Link>
 
@@ -74,10 +73,10 @@ const Main = (props) => {
             <tr>
               <th>COD</th>
               <th>NOME</th>
-              <th>VALOR</th>
+              <th className="collapsable-s">VALOR</th>
               <th className="collapsable-s">ESTOQUE</th>
               <th className="collapsable-m">STATUS</th>
-              <th className="collapsable-s"></th>
+              <th></th>
             </tr>
           </thead>
 
@@ -88,10 +87,10 @@ const Main = (props) => {
                   <tr key={item._id}>
                     <td>{item.cod}</td>
                     <td>{item.name}</td>
-                    <td>{item.price}</td>
+                    <td className="collapsable-s">{item.price}</td>
                     <td className="collapsable-s">{item.ammount}</td>
                     <td className="collapsable-m">{item.status}</td>
-                    <td className="collapsable-s">
+                    <td>
                       <Link to={`/product/${encodeURIComponent(item._id)}`}>
                         <MdEdit />
                       </Link>
