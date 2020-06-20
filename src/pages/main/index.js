@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { MdEdit, MdDelete, MdSearch, MdAddCircle} from 'react-icons/md';
+
+
 import api from '../../services/api';
 
-import { MdEdit, MdDelete, MdSearch, MdAddCircle} from 'react-icons/md';
 
 import {
   Container,
@@ -34,7 +37,12 @@ const Main = (props) => {
         <MdSearch />
       </SearchBar>
       <Card style={{marginTop: '50px'}}>
-        <MdAddCircle style={{fontSize: '50px', position: 'absolute', right: '-5px', top: '-5px', color: '#883EF0'}} />
+        <Link to={`/product/add`}>
+          <MdAddCircle
+            style={{fontSize: '50px', position: 'absolute', right: '-5px', top: '-5px', color: '#883EF0'}}
+          />
+        </Link>
+
         <Table style={{marginTop: '30px'}}>
           <thead>
             <tr>
@@ -57,7 +65,12 @@ const Main = (props) => {
                     <td>{item.price}</td>
                     <td className="collapsable-s">{item.ammount}</td>
                     <td className="collapsable-m">{item.status}</td>
-                    <td className="collapsable-s"> <MdEdit />  <MdDelete/></td>
+                    <td className="collapsable-s">
+                      <Link to={`/product/${encodeURIComponent(item._id)}`}>
+                        <MdEdit />
+                      </Link>
+                      <MdDelete/>
+                    </td>
                   </tr>
                 )):
                 <tr>

@@ -7,14 +7,16 @@ import Container from '../../components/container';
 import { CardContainer, CardHeader,Title, Form, InputContainer, ActionContainer ,Button } from './style';
 
 const AddProduct = (props) => {
+
   const [cod, setCod] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
-
   const [description, setDescription] = useState('');
   const [ammount, setAmmount] = useState('');
   const [status, setStatus] = useState('');
+
+  const [productIdToUpdate, setProductIdToUpdate] = useState('');
 
   const getFields = () => {
     return {
@@ -52,21 +54,54 @@ const AddProduct = (props) => {
   const  handleUpdate = async (evt) => {
     try {
       evt.preventDefault();
-      const updatedProduct = await api.put('products/:id', getFields());
+      const updatedProduct = await api.put(`products/${productIdToUpdate}`, getFields());
       console.log(updatedProduct);
       alert('Produto atualizado com sucesso!') ;
     }catch(err) {
       alert('Erro ao atualizar o produto :(');
+      console.log(err);
     }
   }
 
+
+    useEffect(() => {
+      const getProduct = async () => {
+        try {
+          const { match } = props;
+          const productId = decodeURIComponent(match.params.id);
+          if (productId !== 'add') {
+            setProductIdToUpdate(productId);
+            const response = await api.get(`/products/${productId}`);
+            const { product } = response.data;
+            console.log(product);
+
+            setCod(product.cod);
+            setName(product.name);
+            setPrice(product.price);
+            setCategory(product.category);
+            setDescription(product.description);
+            setAmmount(product.ammount);
+            setStatus(product.status);
+
+          }
+        } catch(err) {
+          console.log(err);
+        }
+      }
+
+      getProduct();
+
+    },[props]);
 
   return(
     <Container>
       <CardContainer style={{marginTop: '60px'}}>
         <CardHeader>
           <div/>
-          <Title>Adicionar novo produto</Title>
+          {
+            productIdToUpdate ? <Title>Produto COD: {cod}</Title> : <Title>Adicionar novo produto</Title>
+          }
+
           <MdClose />
         </CardHeader>
 
@@ -108,7 +143,13 @@ const AddProduct = (props) => {
 
 
           <ActionContainer>
-            <Button onClick={handleSubmit} >Finalizar</Button>
+            {
+              productIdToUpdate ?
+                <Button onClick={handleUpdate} >Atualizar</Button>
+              :
+              <Button onClick={handleSubmit}>Finalizar</Button>
+            }
+
             <Button>Cancelar</Button>
           </ActionContainer>
 
