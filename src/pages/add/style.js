@@ -20,8 +20,11 @@ export const CardHeader = styled.div`
   padding-right: 10px;
   margin-bottom: 50px;
   svg{
-    font-size: 2.4rem;
+    font-size: 3.0rem;
+    font-weight: 700;
     color: #ADADAD;
+    margin-top: 10px;
+    margin-left: 15px;
   }
 `
 

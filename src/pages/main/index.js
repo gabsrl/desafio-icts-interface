@@ -35,6 +35,9 @@ const Main = (props) => {
       setLoading(false);
     }
     getData();
+
+    Modal.setAppElement("#root");
+
   },[productRemoved]);
 
   const handleOnDelete = async () => {

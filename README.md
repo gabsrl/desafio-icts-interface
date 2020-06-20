@@ -15,3 +15,6 @@ Então o app será executado em modo de desenvolvimento em  [http://localhost:30
 
 ## Sobre o desenvolvimento
 A construção deste frontend foi feito todo em ReactJS e a estilização e resposividade foi feita apenas com a biblioteca styled-components flexbox layout do css.
+
+## Live Demo
+Use o app implementado neste link: [https://stitch-araraazul-mtlvs.mongodbstitch.com/](https://stitch-araraazul-mtlvs.mongodbstitch.com/)

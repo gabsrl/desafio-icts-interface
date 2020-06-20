@@ -89,16 +89,10 @@ export const Table = styled.table`
           text-align: center;
           font-size: 2.0rem;
           color: #616060;
-        img {
-          width: 114px;
-          height: 90px;
-          border-radius: 10px;
-          padding-top: 5px;
-        }
-
         svg {
           font-size: 3.7rem;
           color: #883EF0;
+          margin-right: 10px;
         }
       }
     }
@@ -114,13 +108,6 @@ export const Table = styled.table`
   @media (max-width: 425px) {
     .collapsable-s {
       display: none;
-    }
-
-    .product-thumb {
-      width: 60px;
-      height: 80px;
-      border-radius: 10px;
-      padding-top: 5px;
     }
 
   }

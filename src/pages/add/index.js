@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MdClose, MdSubject, MdAttachMoney, MdDescription, MdLayers, MdRemoveRedEye, MdConfirmationNumber} from 'react-icons/md';
+import { MdArrowBack, MdSubject, MdAttachMoney, MdDescription, MdLayers, MdRemoveRedEye, MdConfirmationNumber} from 'react-icons/md';
 
 import api from '../../services/api';
 import Spinner, { SpinnerContainer } from '../../components/spinner';
@@ -109,13 +109,13 @@ const AddProduct = (props) => {
     <Container>
       <CardContainer style={{marginTop: '60px'}}>
         <CardHeader>
-          <div/>
+          <Link to="/">
+            <MdArrowBack />
+          </Link>
           {
             productIdToUpdate ? <Title>Produto COD: {cod}</Title> : <Title>Adicionar novo produto</Title>
           }
-          <Link to="/">
-            <MdClose />
-          </Link>
+          <div/>
         </CardHeader>
 
         {
