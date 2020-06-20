@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MdEdit, MdDelete, MdSearch, MdAddCircle} from 'react-icons/md';
+import Modal from 'react-modal';
+import { MdEdit, MdDelete, MdAddCircle} from 'react-icons/md';
 
 
 import api from '../../services/api';
@@ -8,13 +9,18 @@ import api from '../../services/api';
 
 import {
   Container,
-  SearchBar,
+  ModalContainer,
+  ButtonModal,
+  TextModal,
   Card,
   Table,
 } from './style';
 
 const Main = (props) => {
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState('');
+  const [productRemoved, setProductRemoved] = useState({});
 
   useEffect(() => {
     const getData = async() => {
@@ -27,15 +33,35 @@ const Main = (props) => {
       }
 
     }
-
     getData();
-  },[]);
+  },[productRemoved]);
+
+  const handleOnDelete = async () => {
+    try {
+      const response = await api.delete(`/products/${productToDelete}`);
+      console.log(response);
+      alert('Produto foi deletado com sucesso!');
+      setModalOpen(false);
+      setProductRemoved(response.data.productToRemove);
+    } catch(err) {
+      alert('Erro ao deletar produto.')
+    }
+  }
   return (
     <Container>
-      <SearchBar style={{marginTop: '40px'}}>
-        <input placeholder="Buscar produto por código..." />
-        <MdSearch />
-      </SearchBar>
+      <Modal
+        isOpen={isModalOpen}
+        contentLabel="Meu modal"
+      >
+        <ModalContainer>
+          <TextModal>Tem certeza que deseja apagar o produto?</TextModal>
+          <div style={{display: 'flex'}}>
+            <ButtonModal style={{marginRight: '20px'}} onClick={handleOnDelete}>Sim</ButtonModal>
+            <ButtonModal onClick={() => setModalOpen(false)} >Nao</ButtonModal>
+          </div>
+
+        </ModalContainer>
+      </Modal>
       <Card style={{marginTop: '50px'}}>
         <Link to={`/product/add`}>
           <MdAddCircle
@@ -69,7 +95,7 @@ const Main = (props) => {
                       <Link to={`/product/${encodeURIComponent(item._id)}`}>
                         <MdEdit />
                       </Link>
-                      <MdDelete/>
+                      <MdDelete onClick={() => {setProductToDelete(item._id); setModalOpen(true);}} />
                     </td>
                   </tr>
                 )):

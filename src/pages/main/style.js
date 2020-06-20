@@ -123,7 +123,34 @@ export const Table = styled.table`
     }
 
   }
+`;
 
+export const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center
+`
 
+export const TextModal = styled.h2`
+  font-family: 'Open Sans', sans-serif;
+  color:#616060;
+  font-size: 2.0rem;
+`
+export const ButtonModal = styled.button`
+  width: 133px;
+  height: 37px;
+  border: none;
+  background: #660EE1;
+  border-radius: 4px;
 
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 2.0rem;
+  line-height: 23px;
+  text-align: center;
+  color: #FCFBFB;
+  a {
+    color: #FCFBFB;
+    text-decoration: none;
+  }
 `;
