@@ -6,6 +6,7 @@ import { MdEdit, MdDelete, MdAddCircle} from 'react-icons/md';
 
 import api from '../../services/api';
 
+import Spinner, { SpinnerContainer } from '../../components/spinner';
 import Button from '../../components/button';
 import {
   Container,
@@ -17,6 +18,7 @@ import {
 
 const Main = (props) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState('');
   const [productRemoved, setProductRemoved] = useState({});
@@ -30,7 +32,7 @@ const Main = (props) => {
       }catch(err) {
         console.log(err);
       }
-
+      setLoading(false);
     }
     getData();
   },[productRemoved]);
@@ -68,7 +70,14 @@ const Main = (props) => {
           />
         </Link>
 
-        <Table style={{marginTop: '30px'}}>
+        {
+          loading ?
+            (
+              <SpinnerContainer>
+                <Spinner  color="#400297" size={30}/>
+              </SpinnerContainer>
+            ) :
+            <Table style={{marginTop: '30px'}}>
           <thead>
             <tr>
               <th>COD</th>
@@ -107,6 +116,9 @@ const Main = (props) => {
           </tbody>
 
         </Table>
+        }
+
+
       </Card>
     </Container>
   )

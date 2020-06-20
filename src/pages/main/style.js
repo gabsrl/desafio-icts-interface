@@ -50,7 +50,7 @@ export const Card = styled.div`
   display: flex;
   width: 80%;
   height: 90%;
-
+  justify-content: center;
   background: #FFFFFF;
   box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.25);
   border-radius: 20px;

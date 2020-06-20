@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MdClose, MdSubject, MdAttachMoney, MdDescription, MdLayers, MdRemoveRedEye, MdConfirmationNumber} from 'react-icons/md';
 
 import api from '../../services/api';
+import Spinner, { SpinnerContainer } from '../../components/spinner';
 import Button from '../../components/button';
 import Container from '../../components/container';
 
@@ -18,7 +19,9 @@ const AddProduct = (props) => {
   const [ammount, setAmmount] = useState('');
   const [status, setStatus] = useState('');
 
+  const [loading, setLoading] = useState(true);
   const [productIdToUpdate, setProductIdToUpdate] = useState('');
+
 
   const getFields = () => {
     return {
@@ -34,8 +37,9 @@ const AddProduct = (props) => {
   }
 
   const handleSubmit = async (evt) => {
-    evt.preventDefault();
     try {
+      evt.preventDefault();
+      setLoading(true);
       const response = await api.post('/products', getFields());
 
       setCod('');
@@ -50,18 +54,24 @@ const AddProduct = (props) => {
       alert('Produto Cadastrado!');
     } catch(err) {
       alert('Occoreu um erro :(.');
+    } finally {
+      setLoading(false);
     }
   }
 
   const  handleUpdate = async (evt) => {
     try {
       evt.preventDefault();
+      setLoading(true);
       const updatedProduct = await api.put(`products/${productIdToUpdate}`, getFields());
       console.log(updatedProduct);
       alert('Produto atualizado com sucesso!') ;
     }catch(err) {
       alert('Erro ao atualizar o produto :(');
       console.log(err);
+    }
+    finally {
+      setLoading(false)
     }
   }
 
@@ -88,6 +98,7 @@ const AddProduct = (props) => {
         } catch(err) {
           console.log(err);
         }
+        setLoading(false);
       }
 
       getProduct();
@@ -107,59 +118,67 @@ const AddProduct = (props) => {
           </Link>
         </CardHeader>
 
-        <Form>
-        <InputContainer>
-            <MdConfirmationNumber />
-            <input placeholder="Código do produto" onChange={(evt) => setCod(evt.target.value)} value={cod} />
-          </InputContainer>
+        {
+          loading ?
+            (
+              <SpinnerContainer>
+              <Spinner color="#400297" size={30}/>
+              </SpinnerContainer>
+            )
+            :
+            <Form>
+              <InputContainer>
+                  <MdConfirmationNumber />
+                  <input placeholder="Código do produto" onChange={(evt) => setCod(evt.target.value)} value={cod} />
+                </InputContainer>
 
-          <InputContainer>
-            <MdSubject />
-            <input placeholder="Nome do produto" onChange={(evt) => setName(evt.target.value)} value={name} />
-          </InputContainer>
+                <InputContainer>
+                  <MdSubject />
+                  <input placeholder="Nome do produto" onChange={(evt) => setName(evt.target.value)} value={name} />
+                </InputContainer>
 
-          <InputContainer>
-            <MdAttachMoney />
-            <input placeholder="Valor" onChange={(evt) => setPrice(evt.target.value)} value={price}/>
-          </InputContainer>
+                <InputContainer>
+                  <MdAttachMoney />
+                  <input placeholder="Valor" onChange={(evt) => setPrice(evt.target.value)} value={price}/>
+                </InputContainer>
 
-          <InputContainer>
-            <MdDescription />
-            <input placeholder="Descrição" onChange={(evt) => setDescription(evt.target.value)} value={description} />
-          </InputContainer>
+                <InputContainer>
+                  <MdDescription />
+                  <input placeholder="Descrição" onChange={(evt) => setDescription(evt.target.value)} value={description} />
+                </InputContainer>
 
-          <InputContainer>
-            <MdDescription />
-            <input placeholder="Categoria" onChange={(evt) => setCategory(evt.target.value)} value={category} />
-          </InputContainer>
+                <InputContainer>
+                  <MdDescription />
+                  <input placeholder="Categoria" onChange={(evt) => setCategory(evt.target.value)} value={category} />
+                </InputContainer>
 
-          <InputContainer>
-            <MdLayers />
-            <input placeholder="Estoque" onChange={(evt) => setAmmount(evt.target.value) } value={ammount} />
-          </InputContainer>
+                <InputContainer>
+                  <MdLayers />
+                  <input placeholder="Estoque" onChange={(evt) => setAmmount(evt.target.value) } value={ammount} />
+                </InputContainer>
 
-          <InputContainer>
-            <MdRemoveRedEye />
-            <input placeholder="Status" onChange={(evt) => setStatus(evt.target.value) } value={status} />
-          </InputContainer>
+                <InputContainer>
+                  <MdRemoveRedEye />
+                  <input placeholder="Status" onChange={(evt) => setStatus(evt.target.value) } value={status} />
+                </InputContainer>
 
 
-          <ActionContainer>
-            {
-              productIdToUpdate ?
-                <Button onClick={handleUpdate} >Atualizar</Button>
-              :
-              <Button onClick={handleSubmit}>Finalizar</Button>
-            }
+                <ActionContainer>
+                  {
+                    productIdToUpdate ?
+                      <Button onClick={handleUpdate} >Atualizar</Button>
+                    :
+                    <Button onClick={handleSubmit}>Finalizar</Button>
+                  }
 
-            <Button>
-              <Link to="/">
-                Cancelar
-              </Link>
-            </Button>
-          </ActionContainer>
-
-        </Form>
+                  <Button>
+                    <Link to="/">
+                      Cancelar
+                    </Link>
+                  </Button>
+                </ActionContainer>
+            </Form>
+        }
       </CardContainer>
     </Container>
   );
