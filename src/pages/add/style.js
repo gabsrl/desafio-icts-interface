@@ -82,5 +82,9 @@ export const Button = styled.button`
   line-height: 23px;
   text-align: center;
   color: #FCFBFB;
+  a {
+    color: #FCFBFB;
+    text-decoration: none;
+  }
 `;
 

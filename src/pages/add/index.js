@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MdClose, MdSubject, MdAttachMoney, MdDescription, MdLayers, MdRemoveRedEye, MdConfirmationNumber} from 'react-icons/md';
 
 import api from '../../services/api';
@@ -63,7 +64,6 @@ const AddProduct = (props) => {
     }
   }
 
-
     useEffect(() => {
       const getProduct = async () => {
         try {
@@ -101,8 +101,9 @@ const AddProduct = (props) => {
           {
             productIdToUpdate ? <Title>Produto COD: {cod}</Title> : <Title>Adicionar novo produto</Title>
           }
-
-          <MdClose />
+          <Link to="/">
+            <MdClose />
+          </Link>
         </CardHeader>
 
         <Form>
@@ -150,7 +151,11 @@ const AddProduct = (props) => {
               <Button onClick={handleSubmit}>Finalizar</Button>
             }
 
-            <Button>Cancelar</Button>
+            <Button>
+              <Link to="/">
+                Cancelar
+              </Link>
+            </Button>
           </ActionContainer>
 
         </Form>
