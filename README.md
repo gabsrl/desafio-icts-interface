@@ -3,6 +3,9 @@
 
 Este repositório se destina ao desafio  de uma aplicação de um CRUD de produtos para uma loja virtual hipótetica proposta pelo ICTS- Manaus para uma oportunidade de trabalho. Este repositório compreende o Frontend da aplicação feita utilizando ReactJS.
 
+![home-app-desafio](https://raw.githubusercontent.com/gabsrl/desafio-icts-interface/master/home-app-desafio.png)
+![produto-app-desafio](https://raw.githubusercontent.com/gabsrl/desafio-icts-interface/master/produto.png)
+
 ## Inicialização do projeto
 Antes de realizar a configuração do frontend é importante que todo o backend da aplicação já tenha sido configurado  e esteja funcionando para tudo poder funcionar bem. Veja sobre o backend da aplicação aqui :[https://github.com/gabsrl/desafio-icts-service](https://github.com/gabsrl/desafio-icts-service)
 
